@@ -2,13 +2,13 @@ program ContactList;
 
 uses
   Vcl.Forms,
-  frmMain in 'frmMain.pas' {TfrmMain};
+  UnitMain in 'UnitMain.pas' {frmMain};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TTfrmMain, TfrmMain);
+  Application.CreateForm(TfrmMain, frmMain);
   Application.Run;
 end.

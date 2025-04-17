@@ -13,7 +13,8 @@ A simple contact registration app built with **Delphi 12.1 Community Edition** a
 - Auto-generated ID via `GENERATOR` and `TRIGGER`
 
 ## 🖼️ Screenshot
-*Add a screenshot here if desired*
+![image](https://github.com/user-attachments/assets/253992e5-804b-40ef-8709-145293bd7517)
+
 
 ## 🚀 How to Run
 1. Open the project in **Delphi 12.1 Community Edition**

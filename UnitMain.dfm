@@ -1,8 +1,8 @@
-object Form1: TForm1
+object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Lista de Contatos'
-  ClientHeight = 589
+  ClientHeight = 573
   ClientWidth = 416
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -10,128 +10,157 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
   TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 32
+    Left = 9
+    Top = 16
     Width = 36
     Height = 15
     Caption = 'Nome:'
   end
   object Label2: TLabel
-    Left = 8
-    Top = 61
+    Left = 9
+    Top = 45
     Width = 37
     Height = 15
     Caption = 'E-mail:'
   end
   object Label3: TLabel
-    Left = 8
-    Top = 90
+    Left = 9
+    Top = 74
     Width = 48
     Height = 15
     Caption = 'Telefone:'
   end
   object Label4: TLabel
-    Left = 8
-    Top = 119
+    Left = 9
+    Top = 103
     Width = 70
     Height = 15
     Caption = 'Observa'#231#245'es:'
   end
-  object DBGrid1: TDBGrid
+  object dbContatos: TDBGrid
     Left = 8
-    Top = 320
+    Top = 296
     Width = 399
     Height = 261
     DataSource = dsContatos
-    TabOrder = 0
+    TabOrder = 9
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        ReadOnly = True
+        Width = 38
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Width = 200
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'EMAIL'
+        Width = 200
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Width = 100
+        Visible = True
+      end>
   end
   object btnNew: TButton
     Left = 8
-    Top = 280
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Novo'
-    TabOrder = 1
+    TabOrder = 4
     OnClick = btnNewClick
   end
   object btnSave: TButton
     Left = 89
-    Top = 280
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Salvar'
-    TabOrder = 2
+    Enabled = False
+    TabOrder = 5
     OnClick = btnSaveClick
   end
   object btnDelete: TButton
     Left = 170
-    Top = 280
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Excluir'
-    TabOrder = 3
+    TabOrder = 6
     OnClick = btnDeleteClick
   end
   object btnCancel: TButton
     Left = 251
-    Top = 280
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Cancelar'
-    TabOrder = 4
+    Enabled = False
+    TabOrder = 7
     OnClick = btnCancelClick
   end
   object btnClose: TButton
     Left = 332
-    Top = 280
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Sair'
-    TabOrder = 5
+    TabOrder = 8
     OnClick = btnCloseClick
   end
   object dbObservations: TDBMemo
-    Left = 96
-    Top = 116
+    Left = 97
+    Top = 100
     Width = 311
     Height = 141
     DataField = 'OBSERVACOES'
     DataSource = dsContatos
-    TabOrder = 6
+    TabOrder = 3
   end
   object dbName: TDBEdit
-    Left = 96
-    Top = 29
+    Left = 97
+    Top = 13
     Width = 311
     Height = 23
     DataField = 'NOME'
     DataSource = dsContatos
-    TabOrder = 7
+    TabOrder = 0
   end
   object dbEmail: TDBEdit
-    Left = 96
-    Top = 58
+    Left = 97
+    Top = 42
     Width = 311
     Height = 23
     DataField = 'EMAIL'
     DataSource = dsContatos
-    TabOrder = 8
+    TabOrder = 1
   end
   object dbPhone: TDBEdit
-    Left = 96
-    Top = 87
+    Left = 97
+    Top = 71
     Width = 311
     Height = 23
     DataField = 'TELEFONE'
     DataSource = dsContatos
-    TabOrder = 9
+    TabOrder = 2
   end
   object fdConn: TFDConnection
     Params.Strings = (
@@ -186,6 +215,7 @@ object Form1: TForm1
   end
   object dsContatos: TDataSource
     DataSet = qryContatos
+    OnDataChange = dsContatosDataChange
     Left = 184
     Top = 488
   end

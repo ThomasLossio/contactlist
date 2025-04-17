@@ -1,4 +1,4 @@
-unit frmMain;
+unit UnitMain;
 
 interface
 
@@ -10,12 +10,12 @@ uses
   FireDAC.Phys.IBDef, FireDAC.VCLUI.Wait, Data.DB, Vcl.Grids, Vcl.DBGrids,
   FireDAC.Comp.Client, Vcl.StdCtrls, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Mask, Vcl.ExtCtrls,
-  Vcl.DBCtrls;
+  Vcl.DBCtrls, System.UITypes;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     fdConn: TFDConnection;
-    DBGrid1: TDBGrid;
+    dbContatos: TDBGrid;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -41,6 +41,7 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
+    procedure dsContatosDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
   public
@@ -48,35 +49,65 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnCancelClick(Sender: TObject);
+procedure TfrmMain.btnCancelClick(Sender: TObject);
 begin
   qryContatos.Cancel;
+  dbContatos.SetFocus;
 end;
 
-procedure TForm1.btnCloseClick(Sender: TObject);
+procedure TfrmMain.btnCloseClick(Sender: TObject);
+var
+  CanClose: Boolean;
 begin
-  Close;
+  CanClose := MessageDlg('Tem certeza que deseja sair?', mtConfirmation, [mbYes, mbNo], 0) = mrYes;
+  if CanClose then
+    Close;
 end;
 
-procedure TForm1.btnDeleteClick(Sender: TObject);
+procedure TfrmMain.btnDeleteClick(Sender: TObject);
+var
+  CanDelete: Boolean;
 begin
-  qryContatos.Delete;
+  CanDelete := MessageDlg('Tem certeza que deseja excluir?', mtConfirmation, [mbYes, mbNo], 0) = mrYes;
+  if CanDelete then
+    qryContatos.Delete;
 end;
 
-procedure TForm1.btnNewClick(Sender: TObject);
+procedure TfrmMain.btnNewClick(Sender: TObject);
 begin
   qryContatos.Append;
+  dbName.SetFocus;
 end;
 
-procedure TForm1.btnSaveClick(Sender: TObject);
+procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
-  qryContatos.Post;
+  if Trim(dbName.Text) = '' then
+  begin
+    MessageDlg('O nome é obrigatório.', mtWarning, [mbOk], 0);
+    dbName.SetFocus;
+    Exit;
+  end;
+  
+  try
+    qryContatos.Post;
+    MessageDlg('Contato salvo com sucesso!', mtInformation, [mbOk], 0);
+  except
+    on E: Exception do
+      MessageDlg('Não foi possível salvar o registro: ' + E.Message, mtError, [mbOk], 0);
+  end;
+end;
+
+procedure TfrmMain.dsContatosDataChange(Sender: TObject; Field: TField);
+begin
+  btnSave.Enabled := qryContatos.State in dsEditModes;
+  btnCancel.Enabled := qryContatos.State in dsEditModes;
+  btnDelete.Enabled := not qryContatos.IsEmpty and not (qryContatos.State in dsEditModes);
 end;
 
 end.

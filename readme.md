@@ -1,4 +1,4 @@
-# 👥 Contact List
+# 🧮 Contact List
 
 A simple contact registration app built with **Delphi 12.1 Community Edition** as part of a personal study roadmap.
 
@@ -13,7 +13,7 @@ A simple contact registration app built with **Delphi 12.1 Community Edition** a
 - Auto-generated ID via `GENERATOR` and `TRIGGER`
 
 ## 🖼️ Screenshot
-
+*Add a screenshot here if desired*
 
 ## 🚀 How to Run
 1. Open the project in **Delphi 12.1 Community Edition**
@@ -26,6 +26,14 @@ A simple contact registration app built with **Delphi 12.1 Community Edition** a
 | `frmMain.pas` | Main form logic and operations |
 | `frmMain.dfm` | UI layout (fields, grid, buttons) |
 | `contatos.ib` | Local InterBase database file |
+| `Database Structure.sql` | SQL script to create table, generator, and trigger |
+
+## 🗄️ Database
+The full table and trigger structure is available in the file:
+```
+📄 Database Structure.sql
+```
+This file contains the SQL script used to create the `CONTATOS` table, the generator, and the trigger for auto-incrementing the `ID` field.
 
 ## 📄 .gitignore Notes
 This project ignores all temporary, compiled, and IDE-specific files:
@@ -44,5 +52,5 @@ Refer to the `.gitignore` file for full details.
 MIT
 
 ---
-Made with ☕, curiosity and a little bit of 🙃
+Made with ☕, and a little bit of 🙃
 
